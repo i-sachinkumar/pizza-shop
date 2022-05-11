@@ -9,6 +9,8 @@ public class CustomPizza {
         this.num_of_pizza = num_of_pizza;
     }
 
+    CustomPizza(){  }
+
     public Pizza getPizza() {
         return pizza;
     }

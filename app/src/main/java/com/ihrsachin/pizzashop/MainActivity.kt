@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
 
     // data structures
-    val mCustomPizza = ArrayList<CustomPizza>()
+    val mCustomPizzas = ArrayList<CustomPizza>()
     val availablePizza : MutableMap<String, ArrayList<String>> = HashMap()
 
 
@@ -62,7 +62,8 @@ class MainActivity : AppCompatActivity() {
         //getting json value
         updateOnMainThread()
 
-        val mCustomPizzaAdapter = CustomPizzaAdapter(this, mCustomPizza)
+        val mCustomPizzaAdapter = CustomPizzaAdapter(this, mCustomPizzas)
+        listView.adapter = mCustomPizzaAdapter
 
 
         // adding pizza
@@ -79,7 +80,25 @@ class MainActivity : AppCompatActivity() {
                 val builder1: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(this)
                 builder1.setTitle("Pick a size")
                 builder1.setItems(sizes,DialogInterface.OnClickListener { dialog1, which1 ->
-                    Toast.makeText(this, crusts[which] + " " +  sizes[which], Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this, crusts[which] + " " +  sizes[which], Toast.LENGTH_SHORT).show()
+                    val root = JSONObject(JSONString)
+                    val crustArray : JSONArray = root.getJSONArray("crusts")
+
+                    for(i in 0 until crustArray.length()){
+                        val name = crustArray.getJSONObject(i).getString("name")
+                        val sizeArray:  JSONArray = crustArray.getJSONObject(i).getJSONArray("sizes")
+
+                        if(name == crusts[which]){
+                            for(j in 0 until sizeArray.length()){
+                                val size = sizeArray.getJSONObject(j).getString("name")
+                                val price = sizeArray.getJSONObject(j).getInt("price")
+                                if(sizes[which1] == size){
+                                    val pizza : Pizza = Pizza(false,name,size, price)
+                                    messageDatabaseReference.push().setValue(CustomPizza(pizza, 1))
+                                }
+                            }
+                        }
+                    }
                 })
                 builder1.show()
             })

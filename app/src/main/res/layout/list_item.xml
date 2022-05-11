@@ -29,7 +29,7 @@
         app:layout_constraintStart_toEndOf="@id/pizza_pic"
         app:layout_constraintTop_toTopOf="@id/pizza_pic"
         app:layout_constraintEnd_toStartOf="@id/btn_customize"
-        android:drawableStart="@drawable/veg"
+        android:drawableStart="@drawable/non_veg"
         android:layout_marginHorizontal="10dp"/>
     <TextView
         android:id="@+id/pizza_size"

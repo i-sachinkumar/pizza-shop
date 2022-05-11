@@ -30,8 +30,8 @@ class CustomPizzaAdapter(context : Context, messages : ArrayList<CustomPizza>) :
 
         nameText.text = currPizza.crust
         sizeText.text = currPizza.size
-        quantityText.text = numPizza.toString()
-        priceText.text = currPizza.price.toString()
+        quantityText.text = "quantity: $numPizza"
+        priceText.text = "price: ${currPizza.price}"
 
 
         customiseBtn.setOnClickListener{
