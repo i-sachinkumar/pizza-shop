@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/rjskg/OneDrive/Desktop/android development/PizzaShop/app/src/main/res/layout/activity_main.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/rjskg/OneDrive/Desktop/android development/PizzaShop/app/src/main/res/drawable/veg.xml" value="0.19166666666666668" />
+        <entry key="..\:/Users/rjskg/OneDrive/Desktop/android development/PizzaShop/app/src/main/res/drawable/veg_non_veg.xml" value="0.19166666666666668" />
+        <entry key="..\:/Users/rjskg/OneDrive/Desktop/android development/PizzaShop/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/rjskg/OneDrive/Desktop/android development/PizzaShop/app/src/main/res/layout/list_item.xml" value="0.17552083333333332" />
       </map>
     </option>
   </component>
