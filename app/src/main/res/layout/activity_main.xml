@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <ListView
+        android:id="@+id/list_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_above="@+id/bottom"
@@ -22,6 +23,7 @@
         android:layout_alignParentBottom="true">
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/add_btn"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -32,6 +34,7 @@
             android:layout_height="match_parent"/>
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/total_price"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:background="#FFD863"
