@@ -3,7 +3,7 @@ package com.ihrsachin.pizzashop
 import java.util.ArrayList
 import java.util.HashMap
 
-class Pizza {
+class Pizza : Comparable<Pizza> {
 
     var isVeg: Boolean = false
     var crust: String = "unknown"
@@ -23,4 +23,9 @@ class Pizza {
         }
     }
     constructor(){  }
+
+    override fun compareTo(other: Pizza): Int {
+        if(other.crust == this.crust && other.size == this.size) return 0
+        return 1
+    }
 }

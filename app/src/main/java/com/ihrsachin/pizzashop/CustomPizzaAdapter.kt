@@ -10,6 +10,9 @@ import android.widget.TextView
 import android.widget.Toast
 
 class CustomPizzaAdapter(context : Context, messages : ArrayList<CustomPizza>) : ArrayAdapter<CustomPizza>(context, 0, messages){
+
+    val main = MainActivity()
+
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val current : CustomPizza? = getItem(position)
         var listViewItem = convertView
@@ -26,18 +29,19 @@ class CustomPizzaAdapter(context : Context, messages : ArrayList<CustomPizza>) :
         val customiseBtn : Button = listViewItem.findViewById(R.id.btn_customize)
 
         val currPizza : Pizza = current!!.pizza
-        val numPizza : Int = current.num_of_pizza
+        var numPizza : Int = current.num_of_pizza
+
+
+        customiseBtn.setOnClickListener{
+            //TODO
+            main.customizePizza(position, numPizza)
+        }
 
         nameText.text = currPizza.crust
         sizeText.text = currPizza.size
         quantityText.text = "quantity: $numPizza"
         priceText.text = "price: ${currPizza.price}"
 
-
-        customiseBtn.setOnClickListener{
-            //TODO
-            Toast.makeText(context, "clicked!", Toast.LENGTH_SHORT).show()
-        }
 
         return listViewItem
     }

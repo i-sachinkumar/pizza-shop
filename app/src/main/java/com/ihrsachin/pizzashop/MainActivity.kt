@@ -19,6 +19,7 @@ import android.widget.*
 import com.google.firebase.database.*
 import org.json.JSONArray
 import org.json.JSONObject
+import java.text.FieldPosition
 
 
 class MainActivity : AppCompatActivity() {
@@ -39,10 +40,14 @@ class MainActivity : AppCompatActivity() {
     val availablePizza : MutableMap<String, ArrayList<String>> = HashMap()
 
 
+
     //Firebase Database
     private lateinit var mFirebaseDatabase : FirebaseDatabase
     private lateinit var messageDatabaseReference: DatabaseReference
     private lateinit var mChildEventListener: ChildEventListener
+
+    var totalPrice : Int = 0
+    var totalQuantity : Int = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +69,7 @@ class MainActivity : AppCompatActivity() {
 
         val mCustomPizzaAdapter = CustomPizzaAdapter(this, mCustomPizzas)
         listView.adapter = mCustomPizzaAdapter
+
 
 
         // adding pizza
@@ -94,7 +100,22 @@ class MainActivity : AppCompatActivity() {
                                 val price = sizeArray.getJSONObject(j).getInt("price")
                                 if(sizes[which1] == size){
                                     val pizza : Pizza = Pizza(false,name,size, price)
-                                    messageDatabaseReference.push().setValue(CustomPizza(pizza, 1))
+                                    if(mCustomPizzaAdapter.getPosition(CustomPizza(pizza, 1)) >= 0) {
+                                        messageDatabaseReference.push()
+                                            .setValue(CustomPizza(pizza, 2))
+                                        totalPrice += price
+                                        totalQuantity++
+
+                                        totalPriceTxt.text = "Total Price: $$totalPrice"
+                                    }
+                                    else{
+                                        messageDatabaseReference.push()
+                                            .setValue(CustomPizza(pizza, 1))
+                                        totalPrice += price
+                                        totalQuantity++
+
+                                        totalPriceTxt.text = "Total Price: $$totalPrice"
+                                    }
                                 }
                             }
                         }
@@ -114,7 +135,8 @@ class MainActivity : AppCompatActivity() {
 
             }
             override fun onChildRemoved(snapshot: DataSnapshot) {
-
+                val mCustomPizza : CustomPizza = snapshot.getValue(CustomPizza::class.java)!!
+                mCustomPizzaAdapter.remove(mCustomPizza)
             }
 
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
@@ -131,6 +153,10 @@ class MainActivity : AppCompatActivity() {
     }
  /* *********** End of OnCreate() ***************/
 
+
+    public fun customizePizza(position: Int, n : Int){
+      //  mCustomPizzaAdapter.getItem(position)!!.num_of_pizza = n+1
+    }
 
 
     private fun updateOnMainThread(){
